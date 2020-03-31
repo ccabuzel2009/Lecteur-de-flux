@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+
+{% block body %}
+
+<nav class="navbar navbar-dark bg-dark justify-content-between">
+    <a class="navbar-brand">Flux RSS</a>
+    <form class="form-inline">
+        <a href="connexion" class="btn btn-success" role="button">Connexion</a>
+    </form>
+</nav>
+
+<div class="container">
+    <div class="py-5 text-center">
+        <h2>Bienvenue</h2>
+        <p class="lead">Un flux RSS est un fichier mis à jour en permanence qui permet aux internautes d'obtenir en
+            temps réel les dernières informations sans avoir à consulter le site. C'est simple, gratuit et c'est le
+            meilleur moyen pour ne rien manquer.</p>
+        <a href="connexion" class="btn btn-success" role="button" style="margin-bottom: 10px">Connexion</a>
+        <h2>Formulaire d'inscription</h2>
+        <form method="POST">
+            {% for field in form %}
+                {% if field.widget.input_type != 'hidden' %}
+                    <li style="list-style: none">
+                        <label>{{ field.label() }}</label>
+                        {% if field.errors %}
+                            {% for error in field.errors %}
+                                <div class="alert alert-error">{{ error }}</div>
+                            {% endfor %}
+                        {% endif %}
+                    </li>
+                {% endif %}
+                <li style="list-style: none">
+                    {{ field() }}
+                </li>
+            {% endfor %}
+            <li style="list-style: none; margin-top: 10px">
+                <button class="btn btn-primary" type="submit">Inscription</button>
+            </li>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

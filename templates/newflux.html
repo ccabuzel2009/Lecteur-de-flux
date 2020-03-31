@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+<nav class="navbar navbar-dark bg-dark justify-content-between">
+    <a class="navbar-brand" href="/">Flux RSS</a>
+    <form class="form-inline">
+        <a href="deconnexion" class="btn btn-danger" role="button">Déconnexion</a>
+    </form>
+</nav>
+
+<div class="container">
+    <div class="py-5 text-center">
+        <h2>Formulaire d'ajout de flux</h2>
+        <a href="flux" class="btn btn-primary" role="button" style="margin-top: 10px">Voir mes flux</a>
+        <div class="py-5 text-center">
+            <form method="POST">
+                {% for field in form %}
+                    {% if field.widget.input_type != 'hidden' %}
+                        <li style="list-style: none">
+                            <label>{{ field.label() }}</label>
+                            {% if field.errors %}
+                                {% for error in field.errors %}
+                                    <div class="alert alert-error">{{ error }}</div>
+                                {% endfor %}
+                            {% endif %}
+                        </li>
+                    {% endif %}
+                    <li style="margin-bottom: 10px; list-style: none">
+                        {{ field() }}
+                    </li>
+                {% endfor %}
+                <li style="list-style: none">
+                    <button class="btn btn-primary" type="submit">Ajouter</button>
+                </li>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

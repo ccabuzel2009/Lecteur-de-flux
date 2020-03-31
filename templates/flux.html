@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+<nav class="navbar navbar-dark bg-dark justify-content-between">
+    <a class="navbar-brand">Flux RSS</a>
+    <form class="form-inline">
+        <a href="deconnexion" class="btn btn-danger" role="button">Déconnexion</a>
+    </form>
+</nav>
+
+<div class="container">
+    <div class="py-5 text-center">
+        <h2>Mes flux</h2>
+        <a href="newflux" class="btn btn-primary" role="button">Ajouter un flux</a>
+    </div>
+</div>
+
+{% for n in range(0, root| length) %}
+<div class="card" style="margin-bottom: 10px">
+    <h5 class="card-header">{{root[n].feed.title}}</h5>
+    <div class="card-body">
+        {% for entry in root[n].entries %}
+        <div class="card text-white bg-dark mb-3">
+            <h5 class="card-header">{{entry.title}}</h5>
+            <div class="card-body">
+                <p class="card-text">{{entry.description}}</p>
+                <a href="{{entry.link}}" class="btn btn-primary">Voir l'article</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endfor %}
+
+{% endblock %}
